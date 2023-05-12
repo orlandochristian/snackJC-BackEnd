@@ -10,9 +10,22 @@ const {
      createSnack,
      updateSnack,
      deleteSnack,
+     getHearts,
 } =  require('../Queries/snacks');
 
 
+snacks.get("/hearts", async (req, res) => 
+{
+    
+    
+  const allHearts = await getHearts();
+  if (!allHearts.error) {
+    res.status(200).json(allHearts);
+  } else {
+    res.status(500).json({ error: "server error" });
+  } 
+}
+);
 
 
 // index
@@ -89,5 +102,7 @@ snacks.delete("/:snackId", async (req, res) => {
         res.status(404).json({ error: "server error" });
     }
 }); 
+
+
 
 module.exports = snacks;

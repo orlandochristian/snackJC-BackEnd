@@ -7,7 +7,7 @@ const db =  require("../Db/dbConfig.js");
 
 const getAllSnacks = async () => {
     try {
-      const allSnacks = await db.any("SELECT * FROM snacks");
+      const allSnacks = await db.any("SELECT * FROM snacks order by snack_id");
       return allSnacks;
     } catch (error) {
       return {error};
@@ -62,7 +62,14 @@ const getAllSnacks = async () => {
     }
 
 
-
+    const getHearts = async () => {
+      try {
+        const allhearts = await db.one("SELECT * FROM hearts where heart_id=1");
+        return allhearts;
+      } catch (error) {
+        return {error};
+      }
+    };
 
 
 
@@ -71,5 +78,6 @@ const getAllSnacks = async () => {
     getSnack,
     createSnack,
     updateSnack,
+    getHearts,
     deleteSnack,
     };
